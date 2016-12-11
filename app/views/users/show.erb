@@ -1,0 +1,5 @@
+<%= current_user.username %>
+
+<% current_user.exercises do |exercise| %>
+	<li><%=exercise.name%></li>
+	<% end %>
