@@ -27,7 +27,6 @@ class ExercisesController < ApplicationController
 
 	patch '/exercise/:id' do
 		ex = Exercise.find_by_id(params[:id])
-		binding.pry
 		ex.update(reps: params[:reps]) unless params[:reps].empty?
 		ex.update(weight: params[:weight]) unless params[:weight].empty?
 		redirect to "/users/#{current_user.id}"
