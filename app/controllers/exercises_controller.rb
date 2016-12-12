@@ -36,7 +36,7 @@ class ExercisesController < ApplicationController
 		if logged_in?
 			ex = Exercise.find_by_id(params[:id])
 			binding.pry
-			ex.delete if ex.user_id == current_user.id
+			ex.delete if ex.user == current_user
 			redirect "/users/#{current_user.id}"
 		else
 			redirect '/login'
