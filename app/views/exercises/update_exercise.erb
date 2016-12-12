@@ -6,3 +6,8 @@
 	<input type="number" name="weight" value="<%= @ex.weight %>">
 	<input type="submit" value="update">
 </form>
+
+<form action="/exercise/<%= @ex.id %>/delete" method="POST">
+	<input type="hidden" name="_method" value="DELETE">
+	<input type="submit" value="Delete">
+</form>
