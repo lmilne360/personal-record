@@ -1,7 +1,38 @@
-<%= current_user.username %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Exercises</title>
 
+<style>
+th, td {
+    text-align: left;
+}
+</style>
+
+</head>
+
+<body>
+<h1><%= current_user.username %></h1><br>
+
+<table style="width:100%">
+	<tr>
+		<th>Exercise</th>
+		<th>Reps</th>
+		<th>Weight</th>
+	</tr>
 <% current_user.exercises.each do |exercise| %>
-	<li><a href="/exercise/<%= exercise.id%>"><%=exercise.name%></a></li>
-	<% end %> <br>
+	<tr>
+		<td><a href="/exercise/<%= exercise.id%>"><%=exercise.name%></a></td>
+		<td><%=exercise.reps%></td>
+		<td><%=exercise.weight%></td>
+	</tr>
+	<% end %>
 
+</table>
 <a href="/exercise/new">Add Exercise</a>
+	
+</body>
+</html>
+
+
