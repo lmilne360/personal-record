@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211234605) do
+ActiveRecord::Schema.define(version: 20161212070045) do
 
   create_table "exercises", force: :cascade do |t|
     t.string  "name"
-    t.string  "user_id"
+    t.integer "user_id"
     t.integer "reps"
     t.integer "weight"
   end
