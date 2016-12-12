@@ -1,0 +1,8 @@
+<form action="/exercise/<%= @ex.id %>" method="POST">
+	<input type="hidden" name="_method" value="PATCH">
+	<label>Reps</label>
+	<input type="number" name="reps" value="<%= @ex.reps %>">
+	<label>Weight</label>
+	<input type="number" name="weight" value="<%= @ex.weight %>">
+	<input type="submit" value="update">
+</form>

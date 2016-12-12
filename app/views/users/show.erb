@@ -1,5 +1,7 @@
 <%= current_user.username %>
 
-<% current_user.exercises do |exercise| %>
-	<li><%=exercise.name%></li>
-	<% end %>
+<% current_user.exercises.each do |exercise| %>
+	<li><a href="/exercise/<%= exercise.id%>"><%=exercise.name%></a></li>
+	<% end %> <br>
+
+<a href="/exercise/new">Add Exercise</a>
