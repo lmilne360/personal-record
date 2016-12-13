@@ -13,6 +13,7 @@ class ExercisesController < ApplicationController
 		ex = Exercise.new(name: params[:name])
 		ex.user_id = current_user.id 
 		ex.save
+		flash[:message] = "Successfully created exercise"
 		redirect to "/users/#{current_user.id}"
 	end
 
@@ -21,7 +22,7 @@ class ExercisesController < ApplicationController
 			@ex = Exercise.find_by_id(params[:id])
 		erb :'exercises/update_exercise'
 		else 
-		redirect '/login'
+			redirect '/login'
 		end
 	end
 
@@ -29,14 +30,15 @@ class ExercisesController < ApplicationController
 		ex = Exercise.find_by_id(params[:id])
 		ex.update(reps: params[:reps]) unless params[:reps].empty?
 		ex.update(weight: params[:weight]) unless params[:weight].empty?
+		flash[:message] = "Successfully updated exercise"
 		redirect to "/users/#{current_user.id}"
 	end
 
 	delete '/exercise/:id/delete' do
 		if logged_in?
 			ex = Exercise.find_by_id(params[:id])
-			binding.pry
 			ex.delete if ex.user == current_user
+			flash[:message] = "Exercise deleted"
 			redirect "/users/#{current_user.id}"
 		else
 			redirect '/login'

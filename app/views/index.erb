@@ -6,6 +6,9 @@
 </head>
 <body>
 <h1>Welcome</h1>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 
 <a href="/login">Login</a>
 <a href="/signup">Sign Up</a>

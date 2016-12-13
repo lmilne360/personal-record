@@ -12,14 +12,17 @@ class UsersController < ApplicationController
 	post '/users' do
 		user = User.create(username: params[:username], password: params[:password])
 		session[:user_id] = user.id
+		flash[:message] = "Account Created"
 		redirect to "/users/#{current_user.id}"
 	end
 
 
 	get '/login' do
 		if logged_in?
+			flash[:message] = "Already logged in"
 			redirect "/users/#{current_user.id}"
 		else
+			flash[:message] = "Must be logged in"
 			erb :'users/login'
 		end
 	end
@@ -37,7 +40,8 @@ class UsersController < ApplicationController
 
 	get '/logout' do 
 		if logged_in?
-			session.clear 
+			session.clear
+			flash[:message] = "Bye bye!" 
 			redirect '/'
 		else
 			redirect '/'
