@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
 	get '/signup' do
 		if logged_in?
+			flash[:message] = "Must sign out first"
 			redirect "/users/#{current_user.id}"
 		else
 			erb :'users/new_user'
@@ -22,7 +23,6 @@ class UsersController < ApplicationController
 			flash[:message] = "Already logged in"
 			redirect "/users/#{current_user.id}"
 		else
-			flash[:message] = "Must be logged in"
 			erb :'users/login'
 		end
 	end
@@ -31,6 +31,7 @@ class UsersController < ApplicationController
 		user = User.find_by(username: params[:username])
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id
+			flash[:message] = "Welcome"
 			redirect to "/users/#{current_user.id}"
 		else
 			redirect '/signup'
@@ -40,9 +41,8 @@ class UsersController < ApplicationController
 
 	get '/logout' do 
 		if logged_in?
-			session.clear
-			flash[:message] = "Bye bye!" 
-			redirect '/'
+			session.clear 
+			redirect to '/'
 		else
 			redirect '/'
 		end
