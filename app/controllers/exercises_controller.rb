@@ -19,8 +19,11 @@ class ExercisesController < ApplicationController
 
 	get '/exercise/:id' do
 		if logged_in?
-			@ex = Exercise.find_by_id(params[:id])
-		erb :'exercises/update_exercise'
+			if @ex = Exercise.find_by_id(params[:id]) && @ex.user == current_user
+				erb :'exercises/update_exercise'
+			else
+				redirect "/users/#{current_user.id}"
+			end
 		else 
 			redirect '/login'
 		end
