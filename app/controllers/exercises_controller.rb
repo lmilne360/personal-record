@@ -19,7 +19,8 @@ class ExercisesController < ApplicationController
 
 	get '/exercise/:id' do
 		if logged_in?
-			if @ex = Exercise.find_by_id(params[:id]) && @ex.user == current_user
+			 @ex = Exercise.find_by_id(params[:id])
+			 if @ex != nil && @ex.user = current_user
 				erb :'exercises/update_exercise'
 			else
 				redirect "/users/#{current_user.id}"
