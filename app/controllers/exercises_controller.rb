@@ -12,15 +12,18 @@ class ExercisesController < ApplicationController
 	post '/exercise' do 
 		ex = Exercise.new(name: params[:name])
 		ex.user_id = current_user.id 
-		ex.save
-		flash[:message] = "Successfully created exercise"
-		redirect to "/users/#{current_user.id}"
+		 if ex.save
+			flash[:message] = "Successfully created exercise"
+			redirect to "/users/#{current_user.id}"
+		else
+			redirect '/exercise/new'
+		end
 	end
 
 	get '/exercise/:id' do
 		if logged_in?
 			 @ex = Exercise.find_by_id(params[:id])
-			 if @ex != nil && @ex.user = current_user
+			 if @ex && @ex.user == current_user
 				erb :'exercises/update_exercise'
 			else
 				redirect "/users/#{current_user.id}"
@@ -41,7 +44,7 @@ class ExercisesController < ApplicationController
 	delete '/exercise/:id/delete' do
 		if logged_in?
 			ex = Exercise.find_by_id(params[:id])
-			ex.delete if ex.user == current_user
+			ex.destroy if ex.user == current_user
 			flash[:message] = "Exercise deleted"
 			redirect "/users/#{current_user.id}"
 		else
