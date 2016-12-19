@@ -34,7 +34,8 @@ class UsersController < ApplicationController
 			flash[:message] = "Welcome"
 			redirect to "/users/#{current_user.id}"
 		else
-			redirect '/signup'
+			flash[:message] = "Incorrect Username or Password!"
+			redirect '/'
 		end
 
 	end

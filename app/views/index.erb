@@ -6,12 +6,15 @@
 </head>
 <body>
 <h1>Welcome</h1>
+<div>
 <% if flash.has?(:message) %>
   <%= flash[:message] %>
 <% end %>
-
+</div>
+<div>
 <a href="/login">Login</a>
 <a href="/signup">Sign Up</a>
+</div>
 	
 </body>
 </html>
